@@ -100,7 +100,7 @@ val_dataloader = validation.to_dataloader(
 import pytorch_lightning as pl
 from pytorch_lightning.callbacks import (
     EarlyStopping,
-    LearningRateLogger
+    #LearningRateLogger
 )
 from pytorch_lightning.loggers import TensorBoardLogger
 from pytorch_forecasting.metrics import QuantileLoss
@@ -113,17 +113,17 @@ early_stop_callback = EarlyStopping(
     verbose=False,
     mode="min"
 )
-lr_logger = LearningRateLogger()  # log the learning rate
+#lr_logger = LearningRateLogger()  # log the learning rate
 logger = TensorBoardLogger("lightning_logs")  # log to tensorboard
 # create trainer
 trainer = pl.Trainer(
     max_epochs=30,
     gpus=0,  # train on CPU, use gpus = [0] to run on GPU
     gradient_clip_val=0.1,
-    early_stop_callback=early_stop_callback,
+    #early_stop_callback=early_stop_callback,
     limit_train_batches=30,  # running validation every 30 batches
     # fast_dev_run=True,  # comment in to quickly check for bugs
-    callbacks=[lr_logger],
+    #callbacks=[lr_logger],
     logger=logger,
 )
 # initialise model
@@ -143,11 +143,12 @@ tft.size() # 29.6k parameters in model
 # fit network
 trainer.fit(
     tft,
-    train_dataloader=train_dataloader,
+    train_dataloaders=train_dataloader,
     val_dataloaders=val_dataloader
 )
 
 from pytorch_forecasting.metrics import MAE
+import torch
 # load the best model according to the validation loss (given that
 # we use early stopping, this is not necessarily the last epoch)
 best_model_path = trainer.checkpoint_callback.best_model_path
