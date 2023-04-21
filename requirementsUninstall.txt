@@ -1,0 +1,18 @@
+lightning @ git+https://github.com/PyTorchLightning/pytorch-lightning@61c28cb428a13c2aea6d7f3f55e0f00431a4ea4e
+lightning-cloud==0.5.0
+pyrsistent==0.18.1
+python-dateutil==2.8.2
+python-dotenv==0.20.0
+python-linkedin-v2==0.9.4
+python-multipart==0.0.5
+python-telegram==0.12.0
+python-telegram-bot==12.8
+python3-linkedin==1.0.2
+pytorch-forecasting==0.10.3
+pytorch-lightning==1.7.7
+torch==1.13.0
+torchaudio==2.0.1
+torchmetrics==0.10.0
+torchtext==0.13.0
+torchvision==0.14.0
+tornado==6.2
